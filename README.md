@@ -27,7 +27,12 @@ go get ithub.com/leoapsilva/generic-set-go
 Quick usage example:
 
 ```go
-package set
+package main
+
+import (
+    "fmt"
+    set "github.com/leoapsilva/generic-set-go"
+)
 
 func main() {
 	// Integer Set
