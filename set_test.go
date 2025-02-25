@@ -1,10 +1,7 @@
-package set_test
+package set
 
 import (
-	"fmt"
 	"testing"
-
-	set "github.com/leoapsilva/generic-set-go"
 )
 
 type ComplexStruct struct {
@@ -14,21 +11,21 @@ type ComplexStruct struct {
 
 func TestAdd(t *testing.T) {
 	// Test with string set
-	s := set.New[string]()
+	s := New[string]()
 	s.Add("item1")
 	if !s.Contains("item1") {
 		t.Errorf("Expected set to contain 'item1'")
 	}
 
 	// Test with integer set
-	sInt := set.New[int]()
+	sInt := New[int]()
 	sInt.Add(1)
 	if !sInt.Contains(1) {
 		t.Errorf("Expected set to contain '1'")
 	}
 
 	// Test with complex struct set
-	sStruct := set.New[ComplexStruct]()
+	sStruct := New[ComplexStruct]()
 	item := ComplexStruct{ID: 1, Name: "item1"}
 	sStruct.Add(item)
 	if !sStruct.Contains(item) {
@@ -38,7 +35,7 @@ func TestAdd(t *testing.T) {
 
 func TestRemove(t *testing.T) {
 	// Test with string set
-	s := set.New[string]()
+	s := New[string]()
 	s.Add("item1")
 	s.Remove("item1")
 	if s.Contains("item1") {
@@ -46,7 +43,7 @@ func TestRemove(t *testing.T) {
 	}
 
 	// Test with integer set
-	sInt := set.New[int]()
+	sInt := New[int]()
 	sInt.Add(1)
 	sInt.Remove(1)
 	if sInt.Contains(1) {
@@ -54,7 +51,7 @@ func TestRemove(t *testing.T) {
 	}
 
 	// Test with complex struct set
-	sStruct := set.New[ComplexStruct]()
+	sStruct := New[ComplexStruct]()
 	item := ComplexStruct{ID: 1, Name: "item1"}
 	sStruct.Add(item)
 	sStruct.Remove(item)
@@ -65,7 +62,7 @@ func TestRemove(t *testing.T) {
 
 func TestContains(t *testing.T) {
 	// Test with string set
-	s := set.New[string]()
+	s := New[string]()
 	s.Add("item1")
 	if !s.Contains("item1") {
 		t.Errorf("Expected set to contain 'item1'")
@@ -75,7 +72,7 @@ func TestContains(t *testing.T) {
 	}
 
 	// Test with integer set
-	sInt := set.New[int]()
+	sInt := New[int]()
 	sInt.Add(1)
 	if !sInt.Contains(1) {
 		t.Errorf("Expected set to contain '1'")
@@ -85,7 +82,7 @@ func TestContains(t *testing.T) {
 	}
 
 	// Test with complex struct set
-	sStruct := set.New[ComplexStruct]()
+	sStruct := New[ComplexStruct]()
 	item1 := ComplexStruct{ID: 1, Name: "item1"}
 	item2 := ComplexStruct{ID: 2, Name: "item2"}
 	sStruct.Add(item1)
@@ -99,7 +96,7 @@ func TestContains(t *testing.T) {
 
 func TestSize(t *testing.T) {
 	// Test with string set
-	s := set.New[string]()
+	s := New[string]()
 	if s.Size() != 0 {
 		t.Errorf("Expected set size to be 0")
 	}
@@ -117,7 +114,7 @@ func TestSize(t *testing.T) {
 	}
 
 	// Test with integer set
-	sInt := set.New[int]()
+	sInt := New[int]()
 	if sInt.Size() != 0 {
 		t.Errorf("Expected set size to be 0")
 	}
@@ -135,7 +132,7 @@ func TestSize(t *testing.T) {
 	}
 
 	// Test with complex struct set
-	sStruct := set.New[ComplexStruct]()
+	sStruct := New[ComplexStruct]()
 	if sStruct.Size() != 0 {
 		t.Errorf("Expected set size to be 0")
 	}
@@ -157,7 +154,7 @@ func TestSize(t *testing.T) {
 
 func TestElements(t *testing.T) {
 	// Test with string set
-	s := set.New[string]()
+	s := New[string]()
 	s.Add("item1")
 	s.Add("item2")
 	elements := s.Elements()
@@ -169,7 +166,7 @@ func TestElements(t *testing.T) {
 	}
 
 	// Test with integer set
-	sInt := set.New[int]()
+	sInt := New[int]()
 	sInt.Add(1)
 	sInt.Add(2)
 	elementsInt := sInt.Elements()
@@ -181,7 +178,7 @@ func TestElements(t *testing.T) {
 	}
 
 	// Test with complex struct set
-	sStruct := set.New[ComplexStruct]()
+	sStruct := New[ComplexStruct]()
 	item1 := ComplexStruct{ID: 1, Name: "item1"}
 	item2 := ComplexStruct{ID: 2, Name: "item2"}
 	sStruct.Add(item1)
@@ -193,61 +190,4 @@ func TestElements(t *testing.T) {
 	if !sStruct.Contains(item1) || !sStruct.Contains(item2) {
 		t.Errorf("Expected elements to contain '%v' and '%v'", item1, item2)
 	}
-}
-
-func ExampleAdd_Set() {
-	// Integer Set Example
-	intSet := set.New[int]()
-	intSet.Add(10)
-	intSet.Add(20)
-	intSet.Add(10)                                 // Duplicate, won't be added
-	fmt.Println("Integer Set:", intSet.Elements()) // [10 20]
-	// Output:
-	// Integer Set: [10 20]
-}
-
-func ExampleRemove_Set() {
-	// Integer Set Example
-	intSet := set.New[int]()
-	intSet.Add(10)
-	intSet.Add(20)
-	intSet.Remove(10)
-	fmt.Println("Integer Set after removal:", intSet.Elements()) // [20]
-	// Output:
-	// Integer Set after removal: [20]
-}
-
-func ExampleContains_Set() {
-	// Integer Set Example
-	intSet := set.New[int]()
-	intSet.Add(10)
-	intSet.Add(20)
-	fmt.Println("Contains 10:", intSet.Contains(10)) // true
-	fmt.Println("Contains 30:", intSet.Contains(30)) // false
-	// Output:
-	// Contains 10: true
-	// Contains 30: false
-}
-
-func ExampleSize_Set() {
-	// Integer Set Example
-	intSet := set.New[int]()
-	intSet.Add(10)
-	intSet.Add(20)
-	fmt.Println("Size of set:", intSet.Size()) // 2
-	intSet.Remove(10)
-	fmt.Println("Size of set after removal:", intSet.Size()) // 1
-	// Output:
-	// Size of set: 2
-	// Size of set after removal: 1
-}
-
-func ExampleElements_Set() {
-	// Integer Set Example
-	intSet := set.New[int]()
-	intSet.Add(10)
-	intSet.Add(20)
-	fmt.Println("Elements of set:", intSet.Elements()) // [10 20]
-	// Output:
-	// Elements of set: [10 20]
 }

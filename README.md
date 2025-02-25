@@ -19,7 +19,7 @@ In Go, maps are **unordered collections**. This means that when you iterate over
 
 ```sh
 // go get github.com/leoapsilva/generic-set-go
-go get ithub.com/leoapsilva/generic-set-go
+go get github.com/leoapsilva/generic-set-go
 ``` 
 
 ### Example
